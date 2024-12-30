@@ -3,11 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Driver Management</title>
   </head>
   <body>
+    <!-- Search Driver by Name Form -->
+    <div>
+      <label for="driver-name">Search Driver by Name:</label>
+      <input type="text" id="driver-name" placeholder="Enter driver name" />
+      <button id="search-driver-btn">Search</button>
+    </div>
+
+    <!-- Driver Form for Deleting a Driver by ID -->
+    <h2>Delete a Driver</h2>
+    <form id="delete-driver-form">
+      <label for="driver-id-input">Driver ID:</label>
+      <input type="text" id="driver-id-input" required />
+
+      <button type="submit" id="delete-driver-btn">Delete Driver</button>
+    </form>
+
+    <!-- Driver Form for Creating a New Driver -->
+    <h2>Create a New Driver</h2>
+    <form id="create-driver-form">
+      <label for="driver-name-input">Name:</label>
+      <input type="text" id="driver-name-input" required />
+
+      <label for="driver-surname-input">Surname:</label>
+      <input type="text" id="driver-surname-input" required />
+
+      <label for="driver-birthdate-input">Birthdate:</label>
+      <input type="date" id="driver-birthdate-input" required />
+
+      <label for="driver-email-input">Email:</label>
+      <input type="email" id="driver-email-input" required />
+
+      <label for="driver-phone-input">Phone:</label>
+      <input type="tel" id="driver-phone-input" required />
+
+      <button type="submit" id="create-driver-btn">Create Driver</button>
+    </form>
+
+    <h2>Update a Driver</h2>
+    <form id="update-driver-form">
+      <label for="update-driver-id">Driver ID:</label>
+      <input type="text" id="update-driver-id" required />
+
+      <label for="update-driver-field">Field to Update:</label>
+      <select id="update-driver-field" required>
+        <option value="name">Name</option>
+        <option value="surname">Surname</option>
+        <option value="birthdate">Birthdate</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+        <option value="fullAddress">Full Address</option>
+        <option value="status">Status</option>
+      </select>
+
+      <label for="update-driver-value">New Value:</label>
+      <input type="text" id="update-driver-value" required />
+
+      <button type="submit" id="update-driver-btn">Update Driver</button>
+    </form>
+
     <h1>Driver List</h1>
     <ul id="drivers-list"></ul>
+
     <script src="./script.js"></script>
   </body>
 </html>
