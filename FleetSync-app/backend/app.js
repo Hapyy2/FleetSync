@@ -53,6 +53,14 @@ createTruckRoute(app, client);
 deleteTruckRoute(app, client);
 updateTruckRoute(app, client);
 
+// Routes for coordinators read
+const {
+  getCoordinatorsRoute,
+  getCoordinatorByIdRoute,
+} = require("./CRUD/COORDINATORS/routesCoordinators.js");
+getCoordinatorsRoute(app, client);
+getCoordinatorByIdRoute(app, client);
+
 // Route for main page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
