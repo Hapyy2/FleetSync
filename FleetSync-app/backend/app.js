@@ -9,19 +9,33 @@ app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 const { MongoClient } = require("mongodb");
 const uri = process.env.DB_CONNECTION;
+console.log("DB_CONNECTION:", process.env.DB_CONNECTION);
+console.log(uri);
 const client = new MongoClient(uri);
 
-const { getDrivers } = require("./CRUD/DRIVERS/getDrivers.js");
-
-app.get("/api/drivers", async (req, res) => {
+async function startDB() {
   try {
-    const drivers = await getDrivers(client);
-    res.status(200).json(drivers); // Send data as JSON
-  } catch (error) {
-    console.error("Error fetching drivers:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    await client.connect();
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
   }
-});
+}
+startDB();
+
+const {
+  getDriversRoute,
+  getDriversBySurnameRoute,
+  createDriverRoute,
+  deleteDriverRoute,
+  updateDriverRoute,
+} = require("./CRUD/DRIVERS/CRUD.js");
+getDriversRoute(app, client);
+getDriversBySurnameRoute(app, client);
+createDriverRoute(app, client);
+deleteDriverRoute(app, client);
+updateDriverRoute(app, client);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
