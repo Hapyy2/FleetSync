@@ -1,7 +1,13 @@
 # FleetSync
 
 instalki: <br>
+```
 npm install mongodb
+npm install express
+npm install dotenv
+```
+
+aby sprawdzić czy poprawnie zainstalowano pakiety może posłużyć komenda: npm list --depth=0
 
 ## Sample Data: <br>
 
