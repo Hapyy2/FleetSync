@@ -11,7 +11,7 @@ const { MongoClient } = require("mongodb");
 const uri = process.env.DB_CONNECTION;
 const client = new MongoClient(uri);
 
-const { getDrivers } = require("./CRUD/read.js");
+const { getDrivers } = require("./CRUD/DRIVERS/getDrivers.js");
 
 app.get("/api/drivers", async (req, res) => {
   try {
