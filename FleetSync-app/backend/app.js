@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/public")));
 
+// Connecting to the database
 const { MongoClient } = require("mongodb");
 const uri = process.env.DB_CONNECTION;
 console.log("DB_CONNECTION:", process.env.DB_CONNECTION);
@@ -24,6 +25,7 @@ async function startDB() {
 }
 startDB();
 
+// Routes for drivers CRUD
 const {
   getDriversRoute,
   getDriversBySurnameRoute,
@@ -37,6 +39,21 @@ createDriverRoute(app, client);
 deleteDriverRoute(app, client);
 updateDriverRoute(app, client);
 
+// Routes for trucks CRUD
+const {
+  getTrucksRoute,
+  getTruckByIdRoute,
+  createTruckRoute,
+  deleteTruckRoute,
+  updateTruckRoute,
+} = require("./CRUD/TRUCKS/CRUD.js");
+getTrucksRoute(app, client);
+getTruckByIdRoute(app, client);
+createTruckRoute(app, client);
+deleteTruckRoute(app, client);
+updateTruckRoute(app, client);
+
+// Route for main page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
 });
