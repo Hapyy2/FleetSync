@@ -8,6 +8,8 @@ async function getCoordinatorsList(client, id, surname) {
 
   if (id) {
     cursor = coll.find({ _id: new ObjectId(id) });
+  } else if (surname) {
+    cursor = coll.find({ surname: `${surname}` });
   } else {
     cursor = coll.find();
   }

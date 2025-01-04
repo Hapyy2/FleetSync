@@ -2,9 +2,10 @@ const getTrucksList = require("./getTrucksList.js");
 const createTruck = require("./createTruck.js");
 const deleteTruck = require("./deleteTruck.js");
 const updateTruck = require("./updateTruck.js");
+const { authenticateToken } = require("../../userAuth/authenticateToken.js");
 
 function getTrucksRoute(app, client) {
-  app.get("/api/trucks", async (req, res) => {
+  app.get("/api/trucks", authenticateToken, async (req, res) => {
     try {
       const trucks = await getTrucksList(client);
       res.status(200).json(trucks);
@@ -16,7 +17,7 @@ function getTrucksRoute(app, client) {
 }
 
 function getTruckByIdRoute(app, client) {
-  app.get("/api/trucks/id", async (req, res) => {
+  app.get("/api/trucks/id", authenticateToken, async (req, res) => {
     try {
       const id = req.query.id;
       if (!id) {
@@ -32,7 +33,7 @@ function getTruckByIdRoute(app, client) {
 }
 
 function createTruckRoute(app, client) {
-  app.post("/api/trucks/create", async (req, res) => {
+  app.post("/api/trucks/create", authenticateToken, async (req, res) => {
     try {
       const truck = req.body;
       if (!truck) {
@@ -48,7 +49,7 @@ function createTruckRoute(app, client) {
 }
 
 function deleteTruckRoute(app, client) {
-  app.delete("/api/trucks/:id", async (req, res) => {
+  app.delete("/api/trucks/:id", authenticateToken, async (req, res) => {
     try {
       const truckId = req.params.id;
       if (!truckId) {
@@ -64,7 +65,7 @@ function deleteTruckRoute(app, client) {
 }
 
 function updateTruckRoute(app, client) {
-  app.patch("/api/trucks/:id", async (req, res) => {
+  app.patch("/api/trucks/:id", authenticateToken, async (req, res) => {
     try {
       const truckId = req.params.id;
       const { field, value } = req.body;
