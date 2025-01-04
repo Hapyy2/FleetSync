@@ -1,7 +1,8 @@
 const getCoordinatorsList = require("./getCoordinatorsList.js");
+const { authenticateToken } = require("../../userAuth/authenticateToken.js");
 
 function getCoordinatorsRoute(app, client) {
-  app.get("/api/coordinators", async (req, res) => {
+  app.get("/api/coordinators", authenticateToken, async (req, res) => {
     try {
       const coordinators = await getCoordinatorsList(client);
       res.status(200).json(coordinators);
@@ -13,7 +14,7 @@ function getCoordinatorsRoute(app, client) {
 }
 
 function getCoordinatorByIdRoute(app, client) {
-  app.get("/api/coordinators/:id", async (req, res) => {
+  app.get("/api/coordinators/:id", authenticateToken, async (req, res) => {
     try {
       const coordinatorId = req.params.id;
       if (!coordinatorId) {

@@ -61,6 +61,14 @@ const {
 getCoordinatorsRoute(app, client);
 getCoordinatorByIdRoute(app, client);
 
+// Routes for user login and auth
+const { loginUser } = require("./userAuth/login.js");
+const { refreshToken } = require("./userAuth/refreshToken.js");
+const { logoutUser } = require("./userAuth/logout.js");
+loginUser(app, client);
+refreshToken(app, client);
+logoutUser(app, client);
+
 // Route for main page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/public/index.html"));

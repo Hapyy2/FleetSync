@@ -5,11 +5,13 @@ print("Dropping existing collections...");
 db.drivers.drop();
 db.coordinators.drop();
 db.trucks.drop();
+db.tokens.drop();
 
 print("Creating collections...");
 db.createCollection("drivers");
 db.createCollection("coordinators");
 db.createCollection("trucks");
+db.createCollection("tokens");
 
 print("Inserting drivers...");
 db.drivers.insertMany([
@@ -19,6 +21,7 @@ db.drivers.insertMany([
     birthDate: "1985-06-15",
     email: "john.doe@example.com",
     phone: "123456789",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "123 Main St",
       city: "Springfield",
@@ -35,6 +38,7 @@ db.drivers.insertMany([
     birthDate: "1990-08-25",
     email: "jane.smith@example.com",
     phone: "987654321",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "456 Elm St",
       city: "Chicago",
@@ -51,6 +55,7 @@ db.drivers.insertMany([
     birthDate: "1987-11-02",
     email: "carlos.martinez@example.com",
     phone: "234567890",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "101 Pine St",
       city: "Los Angeles",
@@ -67,6 +72,7 @@ db.drivers.insertMany([
     birthDate: "1993-03-12",
     email: "emma.wilson@example.com",
     phone: "712345678",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "202 Birch Rd",
       city: "San Francisco",
@@ -87,6 +93,7 @@ db.coordinators.insertMany([
     birthDate: "1982-04-10",
     email: "alice.johnson@example.com",
     phone: "122334455",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "789 Maple Ave",
       city: "Houston",
@@ -102,6 +109,7 @@ db.coordinators.insertMany([
     birthDate: "1975-12-05",
     email: "bob.brown@example.com",
     phone: "566778899",
+    password: '$2b$10$HTQHn38WEZIGtsaga07rqe6LTbarGWVJd8w/3xKv2CR4aTyqpZYP6',
     fullAddress: {
       address: "321 Oak St",
       city: "Dallas",

@@ -2,9 +2,10 @@ const getDriversList = require("./getDriversList.js");
 const createDriver = require("./createDriver.js");
 const deleteDriver = require("./deleteDriver.js");
 const updateDriver = require("./updateDriver.js");
+const { authenticateToken } = require("../../userAuth/authenticateToken.js");
 
 function getDriversRoute(app, client) {
-  app.get("/api/drivers", async (req, res) => {
+  app.get("/api/drivers", authenticateToken, async (req, res) => {
     try {
       const drivers = await getDriversList(client);
       res.status(200).json(drivers);
@@ -16,7 +17,7 @@ function getDriversRoute(app, client) {
 }
 
 function getDriversBySurnameRoute(app, client) {
-  app.get("/api/drivers/surname", async (req, res) => {
+  app.get("/api/drivers/surname", authenticateToken, async (req, res) => {
     try {
       const surname = req.query.surname;
       if (!surname) {
@@ -34,7 +35,7 @@ function getDriversBySurnameRoute(app, client) {
 }
 
 function createDriverRoute(app, client) {
-  app.post("/api/drivers/create", async (req, res) => {
+  app.post("/api/drivers/create", authenticateToken, async (req, res) => {
     try {
       const driver = req.body;
       if (!driver) {
@@ -50,7 +51,7 @@ function createDriverRoute(app, client) {
 }
 
 function deleteDriverRoute(app, client) {
-  app.delete("/api/drivers/:id", async (req, res) => {
+  app.delete("/api/drivers/:id", authenticateToken, async (req, res) => {
     try {
       const driverId = req.params.id;
       if (!driverId) {
@@ -66,7 +67,7 @@ function deleteDriverRoute(app, client) {
 }
 
 function updateDriverRoute(app, client) {
-  app.patch("/api/drivers/:id", async (req, res) => {
+  app.patch("/api/drivers/:id", authenticateToken, async (req, res) => {
     try {
       const driverId = req.params.id;
       const { field, value } = req.body;
