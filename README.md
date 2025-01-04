@@ -5,6 +5,13 @@ instalki: <br>
 npm install mongodb
 npm install express
 npm install dotenv
+npm install bcrypt
+npm install jsonwebtoken
+```
+
+```
+Podczas tworzenia projektu:
+npm install --save-dev nodemon
 ```
 
 aby sprawdzić czy poprawnie zainstalowano pakiety może posłużyć komenda: npm list --depth=0
