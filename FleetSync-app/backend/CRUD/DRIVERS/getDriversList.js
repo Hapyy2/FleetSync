@@ -9,7 +9,7 @@ async function getDriversList(client, id, surname) {
   if (id) {
     cursor = coll.find({ _id: new ObjectId(id) });
   } else if (surname) {
-    cursor = coll.find({ surname: `${surname}` });
+    cursor = coll.find({ surname: { $regex: surname, $options: "i" } });
   } else {
     cursor = coll.find();
   }

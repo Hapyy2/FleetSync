@@ -2,6 +2,7 @@ const getTrucksList = require("./getTrucksList.js");
 
 function checkData(field) {
   const validKeys = [
+    "licensePlate",
     "model",
     "mileage",
     "fuel",

@@ -3,8 +3,8 @@ dotenv.config();
 const bcrypt = require("bcrypt");
 const getDriversList = require("../CRUD/DRIVERS/getDriversList.js");
 const getCoordinatorsList = require("../CRUD/COORDINATORS/getCoordinatorsList.js");
-
 const jwt = require("jsonwebtoken");
+const logAction = require("../logs/logAction.js");
 
 function generetaAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
@@ -32,6 +32,11 @@ function loginUser(app, client) {
     }
 
     if (!user) {
+      logAction(null, "login", {
+        username,
+        status: "failed",
+        reason: "Incorrect username",
+      });
       return res.status(400).json({ message: "Wrong username" });
     }
     try {
@@ -58,11 +63,26 @@ function loginUser(app, client) {
         const coll = db.collection("tokens");
         await coll.insertOne(doc);
 
+        logAction(username, "login", {
+          username,
+          userRole,
+          status: "successful",
+        });
         res.json({ accessToken: accessToken, refreshToken: refreshToken });
       } else {
+        logAction(null, "login", {
+          username,
+          status: "failed",
+          reason: "Incorrect password",
+        });
         return res.status(401).json({ message: "Invalid Password" });
       }
     } catch (error) {
+      logAction(null, "login", {
+        username,
+        status: "failed",
+        reason: "Could not log in",
+      });
       res.status(500).json({ message: "Could not log in" });
     }
   });

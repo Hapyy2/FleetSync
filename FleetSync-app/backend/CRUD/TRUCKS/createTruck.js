@@ -1,5 +1,5 @@
 function checkData(truck) {
-  const requiredKeys = ["model", "mileage", "maxFuel"];
+  const requiredKeys = ["licensePlate", "model", "mileage", "maxFuel"];
   const allRequiredKeysExist = requiredKeys.every((key) => key in truck);
 
   if (allRequiredKeysExist) {

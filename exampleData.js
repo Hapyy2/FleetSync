@@ -128,6 +128,7 @@ const emmaId = db.drivers.findOne({ name: "Emma" })._id;
 print("Inserting trucks...");
 db.trucks.insertMany([
   {
+    licensePlate: "8176ZMF",
     model: "Volvo FH",
     mileage: 120000,
     fuel: 150,
@@ -136,6 +137,7 @@ db.trucks.insertMany([
     currentDriver: johnId,
   },
   {
+    licensePlate: "7687FAY",
     model: "Scania R450",
     mileage: 95000,
     fuel: 200,
@@ -144,6 +146,7 @@ db.trucks.insertMany([
     currentDriver: null,
   },
   {
+    licensePlate: "4468FNP",
     model: "Mercedes-Benz Actros",
     mileage: 80000,
     fuel: 250,
@@ -152,6 +155,7 @@ db.trucks.insertMany([
     currentDriver: emmaId,
   },
   {
+    licensePlate: "7740SGT",
     model: "MAN TGX",
     mileage: 110000,
     fuel: 180,

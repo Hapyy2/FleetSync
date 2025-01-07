@@ -46,20 +46,24 @@ const {
   createTruckRoute,
   deleteTruckRoute,
   updateTruckRoute,
+  getTruckByLicensePlateRoute,
 } = require("./CRUD/TRUCKS/CRUD.js");
 getTrucksRoute(app, client);
 getTruckByIdRoute(app, client);
 createTruckRoute(app, client);
 deleteTruckRoute(app, client);
 updateTruckRoute(app, client);
+getTruckByLicensePlateRoute(app, client);
 
 // Routes for coordinators read
 const {
   getCoordinatorsRoute,
   getCoordinatorByIdRoute,
+  getCoordinatorBySurnameRoute,
 } = require("./CRUD/COORDINATORS/routesCoordinators.js");
 getCoordinatorsRoute(app, client);
 getCoordinatorByIdRoute(app, client);
+getCoordinatorBySurnameRoute(app, client);
 
 // Routes for user login and auth
 const { loginUser } = require("./userAuth/login.js");
