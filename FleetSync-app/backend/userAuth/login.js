@@ -58,7 +58,33 @@ function loginUser(app, client) {
         const coll = db.collection("tokens");
         await coll.insertOne(doc);
 
+<<<<<<< Updated upstream
         res.json({ accessToken: accessToken, refreshToken: refreshToken });
+=======
+        logAction(username, "login", {
+          username,
+          userRole,
+          status: "successful",
+        });
+
+        res.cookie("accessToken", accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "Strict",
+          maxAge: 10 * 60 * 1000,
+        });
+
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "Strict",
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+
+        res.status(200).json({
+          userRole: userRole,
+        });
+>>>>>>> Stashed changes
       } else {
         return res.status(401).json({ message: "Invalid Password" });
       }

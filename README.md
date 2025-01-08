@@ -7,6 +7,8 @@ npm install express
 npm install dotenv
 npm install bcrypt
 npm install jsonwebtoken
+npm install cors
+npm install cookie-parser
 ```
 
 ```
@@ -34,4 +36,13 @@ In order to provide sample data for our application you can run the exampleData.
 Command to run:
 ```
 mongosh exampleData.js
+```
+
+
+## Frontend: <br>
+
+```
+nextjs 15 and react 18
+npm install yup
+npm install formik
 ```

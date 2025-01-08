@@ -14,8 +14,14 @@ async function checkToken(client, refreshToken) {
 }
 
 function refreshToken(app, client) {
+<<<<<<< Updated upstream
   app.post("/token", async (req, res) => {
     const refreshToken = req.body.token;
+=======
+  app.post("/token", authenticateToken, async (req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+
+>>>>>>> Stashed changes
     if (refreshToken == null) return res.sendStatus(401);
 
     const isValidToken = await checkToken(client, refreshToken);
@@ -27,7 +33,20 @@ function refreshToken(app, client) {
         name: user.name,
         surname: user.surname,
       });
+<<<<<<< Updated upstream
       res.json({ accessToken: accessToken });
+=======
+      simpleLog(req, "refreshToken", "successful");
+
+      res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 10 * 60 * 1000,
+      });
+
+      res.json({ message: "New access token set in cookie" });
+>>>>>>> Stashed changes
     });
   });
 }
