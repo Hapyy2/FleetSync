@@ -3,25 +3,16 @@ const createDriver = require("./createDriver.js");
 const deleteDriver = require("./deleteDriver.js");
 const updateDriver = require("./updateDriver.js");
 const { authenticateToken } = require("../../userAuth/authenticateToken.js");
-const logAction = require("../../logs/logAction.js");
+const simpleLog = require("../../logs/simpleLog.js");
 
 function getDriversRoute(app, client) {
   app.get("/api/drivers", authenticateToken, async (req, res) => {
     try {
       const drivers = await getDriversList(client);
-      logAction(req.user.surname, "getDriversRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "getDriversRoute", "successful");
       res.status(200).json(drivers);
     } catch (error) {
-      logAction(req.user.surname, "getDriversRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: `${error}`,
-      });
+      simpleLog(req, "getDriversRoute", "failed", error);
       console.error("Error fetching drivers:", error);
       res.status(500).json({ message: "Internal Server Error" });
     }
@@ -38,19 +29,10 @@ function getDriversBySurnameRoute(app, client) {
           .json({ message: "Surname parameter is required" });
       }
       const drivers = await getDriversList(client, undefined, surname);
-      logAction(req.user.surname, "getDriversBySurnameRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "getDriversBySurnameRoute", "successful");
       res.status(200).json(drivers);
     } catch (error) {
-      logAction(req.user.surname, "getDriversBySurnameRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: `${error}`,
-      });
+      simpleLog(req, "getDriversBySurnameRoute", "failed", error);
       console.error("Error fetching drivers by surname:", error);
       res.status(500).json({ message: "Internal Server Error" });
     }
@@ -65,19 +47,10 @@ function createDriverRoute(app, client) {
         return res.status(400).json({ message: "Missing the driver data" });
       }
       const input = await createDriver(client, driver);
-      logAction(req.user.surname, "createDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "createDriverRoute", "successful");
       res.status(input.status).json(input.message);
     } catch (error) {
-      logAction(req.user.surname, "createDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: `${error}`,
-      });
+      simpleLog(req, "createDriverRoute", "failed", error);
       console.error("Error creating a new driver:", error);
       res.status(500).json({ message: "Internal Server Error" });
     }
@@ -92,19 +65,10 @@ function deleteDriverRoute(app, client) {
         return res.status(400).json({ message: "Driver ID is required" });
       }
       const result = await deleteDriver(client, driverId);
-      logAction(req.user.surname, "deleteDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "deleteDriverRoute", "successful");
       res.status(result.status).json({ message: result.message });
     } catch (error) {
-      logAction(req.user.surname, "deleteDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: `${error}`,
-      });
+      simpleLog(req, "deleteDriverRoute", "failed", error);
       console.error("Error deleting driver:", error);
       res.status(500).json({ message: "Internal Server Error" });
     }
@@ -120,19 +84,10 @@ function updateDriverRoute(app, client) {
         return res.status(400).json({ message: "Invalid request data." });
       }
       const result = await updateDriver(client, driverId, field, value);
-      logAction(req.user.surname, "updateDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "updateDriverRoute", "successful");
       res.status(result.status).json({ message: result.message });
     } catch (error) {
-      logAction(req.user.surname, "updateDriverRoute", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: `${error}`,
-      });
+      simpleLog(req, "updateDriverRoute", "failed", error);
       console.error("Error updating driver:", error);
       res.status(500).json({ message: "Internal Server Error" });
     }

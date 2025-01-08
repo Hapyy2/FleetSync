@@ -1,5 +1,5 @@
 const { authenticateToken } = require("./authenticateToken.js");
-const logAction = require("../logs/logAction.js");
+const simpleLog = require("../logs/simpleLog.js");
 
 function logoutUser(app, client) {
   app.delete("/logout", authenticateToken, async (req, res) => {
@@ -9,19 +9,10 @@ function logoutUser(app, client) {
       const db = client.db("transportCompany");
       const coll = db.collection("tokens");
       await coll.deleteOne({ token: refreshToken });
-      logAction(req.user.surname, "logout", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "successful",
-      });
+      simpleLog(req, "logout", "successful");
       res.status(200).json({ message: "Logout successfully" });
     } catch (error) {
-      logAction(req.user.surname, "logout", {
-        username: req.user.surname,
-        role: req.user.role,
-        status: "failed",
-        reason: "Internal server error",
-      });
+      simpleLog(req, "logout", "failed", "Internal server error");
       res.status(500).json({ message: "Internal server error" });
     }
   });
