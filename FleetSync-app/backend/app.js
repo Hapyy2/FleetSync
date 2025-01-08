@@ -1,20 +1,24 @@
+// Reading enviroment variables
 const dotenv = require("dotenv");
 dotenv.config();
-const path = require("path");
 
+// Setting up app
+const path = require("path");
 const express = require("express");
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/public")));
 
+// Enabling connection with the frontend (Cross-Origin Resource Sharing)
 const cors = require("cors");
 app.use(
   cors({
-    origin: "http://localhost:3001", // Replace with your frontend's origin
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );
 
+// Managing cookies
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
