@@ -68,7 +68,24 @@ function loginUser(app, client) {
           userRole,
           status: "successful",
         });
-        res.json({ accessToken: accessToken, refreshToken: refreshToken });
+
+        res.cookie("accessToken", accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "Strict",
+          maxAge: 10 * 60 * 1000,
+        });
+
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "Strict",
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+
+        res.status(200).json({
+          userRole: userRole,
+        });
       } else {
         logAction(null, "login", {
           username,

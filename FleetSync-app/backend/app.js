@@ -7,6 +7,17 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/public")));
 
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "http://localhost:3001", // Replace with your frontend's origin
+    credentials: true,
+  })
+);
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 // Connecting to the database
 const { MongoClient } = require("mongodb");
 const uri = process.env.DB_CONNECTION;
