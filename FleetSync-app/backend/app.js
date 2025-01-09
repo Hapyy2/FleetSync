@@ -80,6 +80,22 @@ getCoordinatorsRoute(app, client);
 getCoordinatorByIdRoute(app, client);
 getCoordinatorBySurnameRoute(app, client);
 
+// Routes for tasks CRUD
+const {
+  getTasksRoute,
+  getTaskByIdRoute,
+  createTaskRoute,
+  deleteTaskRoute,
+  updateTaskRoute,
+  getTaskByNameRoute,
+} = require("./CRUD/TASKS/CRUD.js");
+getTasksRoute(app, client);
+getTaskByIdRoute(app, client);
+createTaskRoute(app, client);
+deleteTaskRoute(app, client);
+updateTaskRoute(app, client);
+getTaskByNameRoute(app, client);
+
 // Routes for user login and auth
 const { loginUser } = require("./userAuth/login.js");
 const { refreshToken } = require("./userAuth/refreshToken.js");

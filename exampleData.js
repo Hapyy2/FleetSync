@@ -176,8 +176,8 @@ db.tasks.insertMany([
   {
     name: "Fruits to FruitCompany",
     status: "Waiting",
-    driver: "",
-    truck: "",
+    driver: null,
+    truck: null,
     deliveryDate: "2025-02-01",
     deliveryAddress: {
       address: "429 Book St",
