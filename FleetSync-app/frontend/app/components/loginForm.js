@@ -9,7 +9,6 @@ export default function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState("");
 
-  // Validation schema using Yup
   const validationSchema = Yup.object({
     username: Yup.string()
       .min(3, "Username must be at least 3 characters")
@@ -19,13 +18,11 @@ export default function LoginForm() {
       .required("Password is required"),
   });
 
-  // Initial form values
   const initialValues = {
     username: "",
     password: "",
   };
 
-  // Submit handler
   const handleSubmit = async (values) => {
     try {
       setError(""); // Reset error state
@@ -35,13 +32,11 @@ export default function LoginForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-        credentials: "include", // Make sure cookies are sent and received
+        credentials: "include", // Include cookies
       });
 
       if (response.ok) {
         const data = await response.json();
-
-        // Redirect based on role
         if (data.userRole === "coordinator") {
           router.push("/coordinator_panel");
         } else if (data.userRole === "driver") {
@@ -51,7 +46,7 @@ export default function LoginForm() {
         setError("Wrong username.");
       } else if (response.status === 401) {
         setError("Invalid password.");
-      } else if (response.status === 500) {
+      } else {
         setError("Could not log in. Please try again later.");
       }
     } catch (error) {
@@ -61,20 +56,24 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-gray-800 text-teal-400 p-6 rounded-md shadow-md max-w-md mx-auto">
-      <h1 className="text-xl font-bold mb-4 text-center">Login</h1>
-      {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+    <div className="w-full">
+      <h1 className="text-lg font-bold mb-4 text-center">Login</h1>
+      {error && (
+        <div className="text-red-500 text-sm mb-4 bg-red-100 p-2 rounded-md">
+          {error}
+        </div>
+      )}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {() => (
-          <Form>
-            <div className="mb-4">
+          <Form className="space-y-6">
+            <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium mb-1 text-teal-300"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Username
               </label>
@@ -83,6 +82,7 @@ export default function LoginForm() {
                 id="username"
                 name="username"
                 className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:border-teal-400 focus:outline-none"
+                placeholder="Enter your username"
               />
               <ErrorMessage
                 name="username"
@@ -91,10 +91,10 @@ export default function LoginForm() {
               />
             </div>
 
-            <div className="mb-4">
+            <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-1 text-teal-300"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 Password
               </label>
@@ -103,6 +103,7 @@ export default function LoginForm() {
                 id="password"
                 name="password"
                 className="w-full p-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:border-teal-400 focus:outline-none"
+                placeholder="Enter your password"
               />
               <ErrorMessage
                 name="password"
