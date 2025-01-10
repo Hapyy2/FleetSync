@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LoginForm from "@/app/components/loginForm.js";
+import LoginForm from "@/app/components/LoginForm.js";
 
 export default function Home() {
   return (
@@ -10,6 +10,7 @@ export default function Home() {
           alt="FleetSync logo"
           width={180}
           height={38}
+          style={{ height: "auto", width: "auto" }} // Maintain aspect ratio
           priority
         />
         <h1 className="text-3xl font-bold">FleetSync</h1>

@@ -100,9 +100,11 @@ getTaskByNameRoute(app, client);
 const { loginUser } = require("./userAuth/login.js");
 const { refreshToken } = require("./userAuth/refreshToken.js");
 const { logoutUser } = require("./userAuth/logout.js");
+const { tokenExpiration } = require("./userAuth/tokenExpiration.js");
 loginUser(app, client);
 refreshToken(app, client);
 logoutUser(app, client);
+tokenExpiration(app, client);
 
 // Route for main page
 app.get("/", (req, res) => {

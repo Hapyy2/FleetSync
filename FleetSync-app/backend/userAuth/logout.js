@@ -5,6 +5,7 @@ function logoutUser(app, client) {
   app.delete("/logout", authenticateToken, async (req, res) => {
     try {
       const refreshToken = req.cookies.refreshToken;
+      simpleLog(req, "logout", "Missing refreshToken");
       if (refreshToken == null) return res.sendStatus(401);
       const db = client.db("transportCompany");
       const coll = db.collection("tokens");
