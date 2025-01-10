@@ -1,16 +1,46 @@
+// Sidebar Component
 "use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { FiRefreshCw } from "react-icons/fi";
-import Modal from "./Modal"; // Custom modal component
+import Modal from "./Modal";
 
 export default function DriverSidebar() {
   const router = useRouter();
   const [remainingTime, setRemainingTime] = useState(null);
-  const [showModal, setShowModal] = useState(false); // State for modal visibility
-  const [sessionExpired, setSessionExpired] = useState(false); // Track session expiry
+  const [showModal, setShowModal] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
+
+  const handleLogout = useCallback(async () => {
+    try {
+      // Refresh the token to ensure validity
+      const refreshResponse = await fetch("https://localhost:3000/token", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (!refreshResponse.ok) {
+        console.warn("Failed to refresh token before logout");
+      }
+
+      // Proceed with logout
+      const logoutResponse = await fetch("https://localhost:3000/logout", {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (logoutResponse.ok) {
+        console.log("Logout successful");
+        router.push("/"); // Redirect to the root after logout
+      } else {
+        console.error(`Failed to logout. Status: ${logoutResponse.status}`);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  }, [router]);
 
   const fetchTokenDetails = useCallback(async () => {
     try {
@@ -26,13 +56,13 @@ export default function DriverSidebar() {
         setRemainingTime(remaining);
       } else {
         console.error("Failed to fetch token details");
-        router.push("/");
+        handleLogout();
       }
     } catch (error) {
       console.error("Error fetching token details:", error);
-      router.push("/");
+      handleLogout();
     }
-  }, [router]);
+  }, [handleLogout]);
 
   const handleRefreshSession = useCallback(async () => {
     try {
@@ -43,52 +73,36 @@ export default function DriverSidebar() {
 
       if (response.ok) {
         console.log("Session refreshed successfully");
-        setSessionExpired(false); // Reset session expired state
+        setSessionExpired(false);
         await fetchTokenDetails();
+        setShowModal(false);
       } else {
         console.error("Failed to refresh session");
+        setSessionExpired(true);
       }
     } catch (error) {
       console.error("Error during session refresh:", error);
+      setSessionExpired(true);
     }
   }, [fetchTokenDetails]);
 
-  const handleLogout = useCallback(async () => {
-    try {
-      const response = await fetch("https://localhost:3000/logout", {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        console.log("Logout successful");
-        router.push("/"); // Redirect to the root after logout
-      } else {
-        console.error("Failed to logout");
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  }, [router]);
-
   useEffect(() => {
-    // If token is valid, start the countdown
     if (remainingTime !== null) {
-      // Handle auto logout 5 seconds before expiry
-      if (remainingTime <= 5000 && !sessionExpired) {
+      // Handle auto logout 10 seconds before expiry
+      if (remainingTime <= 10000 && !sessionExpired) {
         console.log("Logging out due to session expiry...");
+        setSessionExpired(true); // Prevent multiple logout attempts
         handleLogout();
       }
 
       // Show the alert when 30 seconds are left
-      if (remainingTime <= 30000 && !sessionExpired) {
+      if (remainingTime <= 30000 && !showModal && !sessionExpired) {
         setShowModal(true);
       }
     }
-  }, [remainingTime, sessionExpired, handleLogout]);
+  }, [remainingTime, sessionExpired, handleLogout, showModal]);
 
   useEffect(() => {
-    // Update remaining time every second
     const interval = setInterval(() => {
       setRemainingTime((prev) => (prev > 1000 ? prev - 1000 : 0));
     }, 1000);
@@ -97,7 +111,6 @@ export default function DriverSidebar() {
   }, []);
 
   useEffect(() => {
-    // Fetch the token details on component mount
     fetchTokenDetails();
   }, [fetchTokenDetails]);
 
@@ -109,7 +122,6 @@ export default function DriverSidebar() {
 
   return (
     <div className="flex flex-col bg-gray-800 text-white w-64 h-screen fixed">
-      {/* Logo and App Name */}
       <div className="flex items-center gap-2 p-4 border-b border-gray-700">
         <Image
           src="/logo.png"
@@ -122,7 +134,6 @@ export default function DriverSidebar() {
         <span className="text-xl font-semibold">FleetSync</span>
       </div>
 
-      {/* Navigation Links */}
       <nav className="flex-grow flex flex-col gap-4 p-4">
         <Link
           href="http://localhost:3001/driver_panel"
@@ -144,7 +155,6 @@ export default function DriverSidebar() {
         </Link>
       </nav>
 
-      {/* Logout and Refresh Session Buttons */}
       <div className="p-4 border-t border-gray-700 flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <button
@@ -167,14 +177,10 @@ export default function DriverSidebar() {
         </button>
       </div>
 
-      {/* Custom Modal for Session Expiry */}
       {showModal && (
         <Modal
           onClose={() => setShowModal(false)}
-          onRefresh={() => {
-            handleRefreshSession();
-            setSessionExpired(true); // Set sessionExpired to true so we don’t trigger logout
-          }}
+          onRefresh={handleRefreshSession}
           onLogout={handleLogout}
         />
       )}
