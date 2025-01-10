@@ -52,4 +52,5 @@ mongosh exampleData.js
 nextjs 15 and react 18
 npm install yup
 npm install formik
+npm install react-icons
 ```
