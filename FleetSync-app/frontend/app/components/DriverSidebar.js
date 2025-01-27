@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { FiRefreshCw } from "react-icons/fi";
-import Modal from "./Modal"; // Custom modal component
+import Modal from "./Modal";
 
 export default function DriverSidebar() {
   const router = useRouter();
   const [remainingTime, setRemainingTime] = useState(null);
-  const [showModal, setShowModal] = useState(false); // State for modal visibility
-  const [sessionExpired, setSessionExpired] = useState(false); // Track session expiry
+  const [showModal, setShowModal] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
 
   const fetchTokenDetails = useCallback(async () => {
     try {
@@ -62,7 +62,7 @@ export default function DriverSidebar() {
 
       if (response.ok) {
         console.log("Logout successful");
-        router.push("/"); // Redirect to the root after logout
+        router.push("/");
       } else {
         console.error("Failed to logout");
       }
@@ -72,15 +72,12 @@ export default function DriverSidebar() {
   }, [router]);
 
   useEffect(() => {
-    // If token is valid, start the countdown
     if (remainingTime !== null) {
-      // Handle auto logout 5 seconds before expiry
       if (remainingTime <= 5000 && !sessionExpired) {
         console.log("Logging out due to session expiry...");
         handleLogout();
       }
 
-      // Show the alert when 30 seconds are left
       if (remainingTime <= 30000 && !sessionExpired) {
         setShowModal(true);
       }
@@ -88,7 +85,6 @@ export default function DriverSidebar() {
   }, [remainingTime, sessionExpired, handleLogout]);
 
   useEffect(() => {
-    // Update remaining time every second
     const interval = setInterval(() => {
       setRemainingTime((prev) => (prev > 1000 ? prev - 1000 : 0));
     }, 1000);
@@ -97,7 +93,6 @@ export default function DriverSidebar() {
   }, []);
 
   useEffect(() => {
-    // Fetch the token details on component mount
     fetchTokenDetails();
   }, [fetchTokenDetails]);
 
@@ -109,7 +104,6 @@ export default function DriverSidebar() {
 
   return (
     <div className="flex flex-col bg-gray-800 text-white w-64 h-screen fixed">
-      {/* Logo and App Name */}
       <div className="flex items-center gap-2 p-4 border-b border-gray-700">
         <Image
           src="/logo.png"
@@ -122,7 +116,6 @@ export default function DriverSidebar() {
         <span className="text-xl font-semibold">FleetSync</span>
       </div>
 
-      {/* Navigation Links */}
       <nav className="flex-grow flex flex-col gap-4 p-4">
         <Link
           href="http://localhost:3001/driver_panel"
@@ -144,7 +137,6 @@ export default function DriverSidebar() {
         </Link>
       </nav>
 
-      {/* Logout and Refresh Session Buttons */}
       <div className="p-4 border-t border-gray-700 flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <button
@@ -167,13 +159,12 @@ export default function DriverSidebar() {
         </button>
       </div>
 
-      {/* Custom Modal for Session Expiry */}
       {showModal && (
         <Modal
           onClose={() => setShowModal(false)}
           onRefresh={() => {
             handleRefreshSession();
-            setSessionExpired(true); // Set sessionExpired to true so we don’t trigger logout
+            setSessionExpired(true);
           }}
           onLogout={handleLogout}
         />
