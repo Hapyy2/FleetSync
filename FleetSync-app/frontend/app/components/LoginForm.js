@@ -25,14 +25,14 @@ export default function LoginForm() {
 
   const handleSubmit = async (values) => {
     try {
-      setError(""); // Reset error state
+      setError("");
       const response = await fetch("https://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-        credentials: "include", // Include cookies
+        credentials: "include",
       });
 
       if (response.ok) {

@@ -1,4 +1,4 @@
-const getTrucksList = require("./getTasksList.js");
+const getTasksList = require("./getTasksList.js");
 
 function checkData(field) {
   const validKeys = [

@@ -4,7 +4,7 @@ function checkData(field) {
   const validKeys = [
     "name",
     "surname",
-    "birthdate",
+    "birthDate",
     "email",
     "phone",
     "fullAddress",

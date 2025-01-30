@@ -8,8 +8,7 @@ async function getTasksList(client, id, name) {
 
   if (id) {
     cursor = coll.find({ _id: new ObjectId(id) });
-  }
-  if (name) {
+  } else if (name) {
     cursor = coll.find({
       name: { $regex: name, $options: "i" },
     });

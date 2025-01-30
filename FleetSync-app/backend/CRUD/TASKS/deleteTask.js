@@ -1,4 +1,4 @@
-const getTrucksList = require("./getTasksList.js");
+const getTasksList = require("./getTasksList.js");
 
 async function deleteTask(client, id) {
   const db = client.db("transportCompany");
