@@ -9,6 +9,7 @@ npm install bcrypt
 npm install jsonwebtoken
 npm install cors
 npm install cookie-parser
+npm install socket.io
 ```
 
 ```
@@ -72,4 +73,5 @@ nextjs 15 and react 18
 npm install yup
 npm install formik
 npm install react-icons
+npm install socket.io-client
 ```

@@ -272,4 +272,13 @@ db.tasks.insertMany([
   },
 ]);
 
+db.messages.createIndex({ chatId: 1, timestamp: 1 })
+db.messages.createIndex({ senderId: 1 })
+db.messages.createIndex({ receiverId: 1 })
+db.messages.createIndex({ timestamp: 1 })
+
+// Create indexes for users to speed up lookups
+db.drivers.createIndex({ name: 1, surname: 1 })
+db.coordinators.createIndex({ name: 1, surname: 1 })
+
 print("Database setup complete.");
