@@ -7,9 +7,9 @@ async function getTrucksList(client, id, licensePlate) {
   let cursor;
 
   if (id) {
+    console.log(id);
     cursor = coll.find({ _id: new ObjectId(id) });
-  }
-  if (licensePlate) {
+  } else if (licensePlate) {
     cursor = coll.find({
       licensePlate: { $regex: licensePlate, $options: "i" },
     });

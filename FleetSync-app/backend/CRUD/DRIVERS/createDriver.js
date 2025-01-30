@@ -7,14 +7,7 @@ async function hashPassword(password) {
 }
 
 function checkData(driver) {
-  const requiredKeys = [
-    "name",
-    "surname",
-    "birthdate",
-    "email",
-    "phone",
-    "password",
-  ];
+  const requiredKeys = ["name", "surname", "birthDate", "email", "phone"];
   const allRequiredKeysExist = requiredKeys.every((key) => key in driver);
 
   if (allRequiredKeysExist) {
@@ -26,6 +19,9 @@ function checkData(driver) {
     }
     if (!("employmentDate" in driver)) {
       driver.employmentDate = new Date();
+    }
+    if (!("password" in driver)) {
+      driver.password = driver.surname + "123";
     }
     return 200;
   } else {

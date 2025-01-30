@@ -6,6 +6,8 @@ async function deleteTruck(client, id) {
 
   const findResult = await getTrucksList(client, id);
 
+  console.log(findResult);
+
   if (findResult.length == 1) {
     const result = await coll.deleteOne(findResult[0]);
     return { status: 200, message: "Truck deleted", result: result };

@@ -15,9 +15,10 @@ app.use(
   cors({
     origin: "http://localhost:3001",
     credentials: true,
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"], // Dodaj to
+    allowedHeaders: ["Content-Type", "Authorization"], // Dodaj to
   })
 );
-
 // Managing cookies
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -111,4 +112,4 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
 });
 
-module.exports = app;
+module.exports = { app, client };

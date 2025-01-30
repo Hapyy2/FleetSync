@@ -1,8 +1,12 @@
-export default function coordinatorLayout({ children }) {
+import CoordinatorSidebar from "@/app/components/CoordinatorSidebar";
+
+export default function coordinatorMainLayout({ children }) {
   return (
-    <div>
-      <h3 className="text-2xl font-bold mb-4">FleetSync</h3>
-      {children}
+    <div className="flex">
+      <CoordinatorSidebar />
+      <div className="ml-64 w-full p-8 bg-gray-100 min-h-screen">
+        {children}
+      </div>
     </div>
   );
 }
