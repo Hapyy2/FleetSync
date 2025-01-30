@@ -1,4 +1,3 @@
-// app/hooks/useMqtt.js
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
@@ -8,8 +7,8 @@ const MQTT_OPTIONS = {
   keepalive: 30,
   protocol: "ws",
   protocolVersion: 4,
-  reconnectPeriod: 1000, // Attempt to reconnect every second
-  connectTimeout: 30 * 1000, // 30 seconds timeout
+  reconnectPeriod: 1000,
+  connectTimeout: 30 * 1000,
   rejectUnauthorized: false,
   clientId: "fleetsync_frontend_" + Math.random().toString(16).substring(2, 8),
 };

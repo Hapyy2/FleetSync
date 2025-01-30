@@ -16,7 +16,6 @@ export default function FaultReportForm() {
     mqtt: false,
   });
 
-  // Update MQTT connection status when it changes
   useEffect(() => {
     setConnectionStatus((prev) => ({
       ...prev,
@@ -24,7 +23,6 @@ export default function FaultReportForm() {
     }));
   }, [isMqttConnected]);
 
-  // Socket.IO connection setup
   useEffect(() => {
     const newSocket = io("https://localhost:3000", {
       withCredentials: true,
@@ -55,7 +53,6 @@ export default function FaultReportForm() {
         text: response.message || "Fault reported successfully",
       });
       setSubmitting(false);
-      // Only clear form on success
       if (response.success) {
         setTopic("");
         setDescription("");
@@ -69,7 +66,6 @@ export default function FaultReportForm() {
 
     setSocket(newSocket);
 
-    // Cleanup on unmount
     return () => {
       newSocket.close();
     };
@@ -78,7 +74,6 @@ export default function FaultReportForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if at least one connection is available
     if (!connectionStatus.socket && !connectionStatus.mqtt) {
       setMessage({
         type: "error",
@@ -98,7 +93,6 @@ export default function FaultReportForm() {
         status: "pending",
       };
 
-      // Try both MQTT and Socket.IO
       if (connectionStatus.mqtt) {
         publish("fleetsync/faults/new", faultData);
       }
@@ -107,13 +101,11 @@ export default function FaultReportForm() {
         socket.emit("reportFault", faultData);
       }
 
-      // If neither threw an error, show success
       setMessage({
         type: "success",
         text: "Fault report submitted",
       });
 
-      // Clear form
       setTopic("");
       setDescription("");
     } catch (error) {
@@ -131,7 +123,6 @@ export default function FaultReportForm() {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Report a Fault</h2>
 
-      {/* Connection Status Indicators */}
       <div className="mb-6 p-4 bg-gray-50 rounded-lg">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
@@ -162,7 +153,6 @@ export default function FaultReportForm() {
         </div>
       </div>
 
-      {/* Success/Error Messages */}
       {message.text && (
         <div
           className={`mb-6 p-4 rounded-lg ${
@@ -175,7 +165,6 @@ export default function FaultReportForm() {
         </div>
       )}
 
-      {/* Fault Report Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label

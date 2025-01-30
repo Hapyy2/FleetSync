@@ -1,4 +1,3 @@
-// mqttClient.js
 const mqtt = require("mqtt");
 
 class MQTTClient {
@@ -34,6 +33,5 @@ class MQTTClient {
   }
 }
 
-// Create and export a singleton instance
 const mqttClient = new MQTTClient();
 module.exports = mqttClient;
