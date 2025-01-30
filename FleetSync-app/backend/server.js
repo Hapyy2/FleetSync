@@ -3,6 +3,7 @@ const https = require("https");
 const http = require("http");
 const { app, client } = require("./app");
 const configureSocketIO = require("./sockets/socketConfig");
+const mqttClient = require("./mqttClient");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -21,6 +22,8 @@ const httpServer = http.createServer((req, res) => {
   res.writeHead(301, { Location: `https://${host}:${HTTPS_PORT}${req.url}` });
   res.end();
 });
+
+mqttClient.connect();
 
 const io = configureSocketIO(httpsServer, client);
 

@@ -1,7 +1,9 @@
+import FaultReportForm from "@/app/components/FaultReportForm";
+
 export default function driverReportPage() {
   return (
-    <div>
-      <h2>Report</h2>
+    <div className="p-6">
+      <FaultReportForm />
     </div>
   );
 }

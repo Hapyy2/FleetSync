@@ -10,6 +10,7 @@ npm install jsonwebtoken
 npm install cors
 npm install cookie-parser
 npm install socket.io
+npm install mqtt
 ```
 
 ```
@@ -24,6 +25,13 @@ odpalenie lokalnie mongodb
 sudo systemctl start mongod
 sudo systemctl status mongod
 ```
+
+Aby aplikacja w pełni działała potrzebujemy brokera MQTT. Możemy zastosować broker HIVEMQ w wersji community:
+https://github.com/hivemq/hivemq-community-edition
+```
+Po pobraniu w plikach brokera uruchamiamy skrypt: ./bin/run.sh
+```
+
 
 tworzenie klucza dla tokenu logowania (JWT)
 ```
@@ -74,4 +82,5 @@ npm install yup
 npm install formik
 npm install react-icons
 npm install socket.io-client
+npm install mqtt
 ```
