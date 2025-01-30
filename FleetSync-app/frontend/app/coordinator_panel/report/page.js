@@ -1,7 +1,9 @@
+import FaultManagement from "@/app/components/FaultManagement";
+
 export default function coordinatorReportPage() {
   return (
-    <div>
-      <h2>Report</h2>
+    <div className="p-6">
+      <FaultManagement />
     </div>
   );
 }

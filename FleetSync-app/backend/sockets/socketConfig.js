@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { ObjectId } = require("mongodb");
 const chatHandlers = require("./chatHandlers");
 const taskHandlers = require("./taskHandlers");
+const faultHandlers = require("./faultHandlers");
 
 function configureSocketIO(server, client) {
   const io = socketIO(server, {
@@ -119,6 +120,7 @@ function configureSocketIO(server, client) {
 
       chatHandlers(socket, io, activeConnections, client);
       taskHandlers(socket, io, activeConnections, client);
+      faultHandlers(socket, io, activeConnections, client);
 
       socket.on("disconnect", async () => {
         if (socket.user?.id) {

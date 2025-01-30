@@ -689,3 +689,55 @@
 [2025-01-30T15:06:51.750Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
 [2025-01-30T15:06:54.706Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
 [2025-01-30T15:06:54.716Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:28:21.717Z] User: Wilson | Action: login | Details: {"username":"Wilson","userRole":"driver","status":"successful"}
+[2025-01-30T20:28:23.871Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
+[2025-01-30T20:28:24.803Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:28:24.812Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:39.746Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:39.753Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:53.167Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:53.183Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:53.184Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:53.190Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:56.058Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:33:56.069Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:37:54.902Z] User: Johnson | Action: refreshToken | Details: {"username":"Johnson","role":"coordinator","status":"failed","reason":"Empty request"}
+[2025-01-30T20:37:54.908Z] User: Johnson | Action: refreshToken | Details: {"username":"Johnson","role":"coordinator","status":"failed","reason":"Wrong refreshToken"}
+[2025-01-30T20:37:54.915Z] User: Johnson | Action: refreshToken | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:38:15.155Z] User: Johnson | Action: logout | Details: {"username":"Johnson","status":"Missing refreshToken"}
+[2025-01-30T20:38:15.162Z] User: Johnson | Action: logout | Details: {"username":"Johnson","status":"successful"}
+[2025-01-30T20:38:30.607Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
+[2025-01-30T20:38:32.747Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:38:32.754Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:02.431Z] User: Wilson | Action: login | Details: {"username":"Wilson","userRole":"driver","status":"successful"}
+[2025-01-30T20:48:14.590Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
+[2025-01-30T20:48:17.067Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:17.089Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:46.398Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:46.402Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:48.473Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:48.482Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:51.265Z] User: Johnson | Action: getTruckByLicensePlateRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:54.423Z] User: Johnson | Action: getTruckByLicensePlateRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:56.838Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:56.851Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:48:59.185Z] User: Johnson | Action: getDriversBySurnameRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:49:00.997Z] User: Johnson | Action: getDriversBySurnameRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:49:02.531Z] User: Johnson | Action: getDriversBySurnameRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:08.943Z] User: Johnson | Action: deleteTaskRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.017Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.038Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.047Z] User: Johnson | Action: getTaskByIdRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.054Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.067Z] User: Johnson | Action: getTrucksRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:50:19.116Z] User: Johnson | Action: getTaskByIdRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:53:18.887Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
+[2025-01-30T20:53:20.157Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:53:20.264Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:53:30.285Z] User: Wilson | Action: login | Details: {"username":"Wilson","userRole":"driver","status":"successful"}
+[2025-01-30T20:54:03.314Z] User: Johnson | Action: login | Details: {"username":"Johnson","userRole":"coordinator","status":"successful"}
+[2025-01-30T20:54:05.718Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:54:05.732Z] User: Johnson | Action: getDriversRoute | Details: {"username":"Johnson","role":"coordinator","status":"successful"}
+[2025-01-30T20:55:36.892Z] User: Wilson | Action: refreshToken | Details: {"username":"Wilson","role":"driver","status":"failed","reason":"Empty request"}
+[2025-01-30T20:55:36.896Z] User: Wilson | Action: refreshToken | Details: {"username":"Wilson","role":"driver","status":"failed","reason":"Wrong refreshToken"}
+[2025-01-30T20:55:36.900Z] User: Wilson | Action: refreshToken | Details: {"username":"Wilson","role":"driver","status":"successful"}

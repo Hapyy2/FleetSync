@@ -7,6 +7,8 @@ db.coordinators.drop();
 db.trucks.drop();
 db.tokens.drop();
 db.tasks.drop();
+db.faults.drop();
+db.messages.drop();
 
 print("Creating collections...");
 db.createCollection("drivers");
@@ -14,6 +16,7 @@ db.createCollection("coordinators");
 db.createCollection("trucks");
 db.createCollection("tokens");
 db.createCollection("tasks");
+db.createCollection("faults");
 
 print("Inserting drivers...");
 db.drivers.insertMany([
@@ -272,13 +275,119 @@ db.tasks.insertMany([
   },
 ]);
 
-db.messages.createIndex({ chatId: 1, timestamp: 1 })
-db.messages.createIndex({ senderId: 1 })
-db.messages.createIndex({ receiverId: 1 })
-db.messages.createIndex({ timestamp: 1 })
+print("Inserting faults...");
+db.faults.insertMany([
+  {
+    topic: "Engine failure",
+    description: "Engine making strange noises",
+    status: "pending",
+    createdAt: new Date("2025-01-15T08:30:00Z"),
+    updatedAt: new Date("2025-01-15T08:30:00Z"),
+    driver: {
+      name: "John",
+      surname: "Doe",
+      email: "john.doe@example.com",
+    },
+    truckInfo: {
+      licensePlate: "8176ZMF",
+      model: "Volvo FH",
+    },
+  },
+  {
+    topic: "Brake system malfunction",
+    description:
+      "Unusual grinding noise when braking, reduced brake responsiveness",
+    status: "solved",
+    createdAt: new Date("2025-01-10T14:15:00Z"),
+    updatedAt: new Date("2025-01-12T09:20:00Z"),
+    driver: {
+      name: "Emma",
+      surname: "Wilson",
+      email: "emma.wilson@example.com",
+    },
+    truckInfo: {
+      licensePlate: "4468FNP",
+      model: "Mercedes-Benz Actros",
+    },
+    resolution: "Brake pads and rotors replaced, system fully serviced",
+  },
+  {
+    topic: "Transmission issues",
+    description:
+      "Difficulty shifting gears, transmission fluid leakage observed",
+    status: "solved",
+    createdAt: new Date("2025-01-05T11:45:00Z"),
+    updatedAt: new Date("2025-01-07T16:30:00Z"),
+    driver: {
+      name: "John",
+      surname: "Doe",
+      email: "john.doe@example.com",
+    },
+    truckInfo: {
+      licensePlate: "8176ZMF",
+      model: "Volvo FH",
+    },
+    resolution: "Transmission fluid replaced and seals repaired",
+  },
+  {
+    topic: "Electrical system failure",
+    description: "Dashboard lights flickering, battery not holding charge",
+    status: "solved",
+    createdAt: new Date("2024-12-28T09:00:00Z"),
+    updatedAt: new Date("2024-12-29T15:45:00Z"),
+    driver: {
+      name: "Emma",
+      surname: "Wilson",
+      email: "emma.wilson@example.com",
+    },
+    truckInfo: {
+      licensePlate: "4468FNP",
+      model: "Mercedes-Benz Actros",
+    },
+    resolution: "Alternator replaced and battery system serviced",
+  },
+  {
+    topic: "Fuel system problem",
+    description: "Poor fuel efficiency, engine misfiring at high speeds",
+    status: "solved",
+    createdAt: new Date("2024-12-20T13:20:00Z"),
+    updatedAt: new Date("2024-12-22T10:15:00Z"),
+    driver: {
+      name: "John",
+      surname: "Doe",
+      email: "john.doe@example.com",
+    },
+    truckInfo: {
+      licensePlate: "8176ZMF",
+      model: "Volvo FH",
+    },
+    resolution: "Fuel injectors cleaned and fuel filter replaced",
+  },
+  {
+    topic: "Tire pressure sensor malfunction",
+    description: "False tire pressure warnings, inconsistent readings",
+    status: "pending",
+    createdAt: new Date("2025-01-28T16:45:00Z"),
+    updatedAt: new Date("2025-01-28T16:45:00Z"),
+    driver: {
+      name: "Emma",
+      surname: "Wilson",
+      email: "emma.wilson@example.com",
+    },
+    truckInfo: {
+      licensePlate: "4468FNP",
+      model: "Mercedes-Benz Actros",
+    },
+  },
+]);
 
-// Create indexes for users to speed up lookups
-db.drivers.createIndex({ name: 1, surname: 1 })
-db.coordinators.createIndex({ name: 1, surname: 1 })
+print("Creating indexes...");
+db.messages.createIndex({ chatId: 1, timestamp: 1 });
+db.messages.createIndex({ senderId: 1 });
+db.messages.createIndex({ receiverId: 1 });
+db.messages.createIndex({ timestamp: 1 });
+
+db.drivers.createIndex({ name: 1, surname: 1 });
+db.coordinators.createIndex({ name: 1, surname: 1 });
 
 print("Database setup complete.");
