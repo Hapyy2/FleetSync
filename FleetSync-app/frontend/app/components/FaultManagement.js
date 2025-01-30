@@ -19,7 +19,6 @@ export default function FaultManagement() {
     mqtt: false,
   });
 
-  // Update MQTT connection status when it changes
   useEffect(() => {
     setConnectionStatus((prev) => ({
       ...prev,
@@ -27,7 +26,6 @@ export default function FaultManagement() {
     }));
   }, [isMqttConnected]);
 
-  // Socket.IO setup
   useEffect(() => {
     const newSocket = io("https://localhost:3000", {
       withCredentials: true,
@@ -81,7 +79,6 @@ export default function FaultManagement() {
     };
   }, []);
 
-  // MQTT subscription setup
   useEffect(() => {
     if (isMqttConnected) {
       subscribe("fleetsync/faults/new", (fault) => {

@@ -1,4 +1,3 @@
-// faultHandlers.js
 const mqtt = require("mqtt");
 const { ObjectId } = require("mongodb");
 
@@ -6,16 +5,13 @@ function faultHandlers(socket, io, activeConnections, client) {
   const db = client.db("transportCompany");
   const faultsCollection = db.collection("faults");
 
-  // Create MQTT client
-  const mqttClient = mqtt.connect("mqtt://localhost:1883"); // or your HiveMQ broker address
+  const mqttClient = mqtt.connect("mqtt://localhost:1883");
 
-  // Handle MQTT connection
   mqttClient.on("connect", () => {
     console.log("MQTT Connected");
     mqttClient.subscribe("fleetsync/faults/#");
   });
 
-  // Handle MQTT messages
   mqttClient.on("message", async (topic, message) => {
     if (topic === "fleetsync/faults/status") {
       const data = JSON.parse(message);
@@ -23,12 +19,9 @@ function faultHandlers(socket, io, activeConnections, client) {
     }
   });
 
-  // Helper function to emit updated faults
   async function emitUpdatedFaults() {
     try {
       const faults = await faultsCollection.find({}).toArray();
-
-      // Emit to all coordinators
       const coordinatorConnections = Array.from(
         activeConnections.values()
       ).filter((conn) => conn.user.role === "coordinator");
@@ -37,7 +30,6 @@ function faultHandlers(socket, io, activeConnections, client) {
         io.to(conn.socketId).emit("faultsList", faults);
       });
 
-      // Emit to drivers only their own faults
       const driverConnections = Array.from(activeConnections.values()).filter(
         (conn) => conn.user.role === "driver"
       );
@@ -53,7 +45,6 @@ function faultHandlers(socket, io, activeConnections, client) {
     }
   }
 
-  // Handle fault report submission
   socket.on("reportFault", async (faultData) => {
     try {
       const fault = {
@@ -70,7 +61,6 @@ function faultHandlers(socket, io, activeConnections, client) {
 
       const result = await faultsCollection.insertOne(fault);
 
-      // Publish to MQTT
       mqttClient.publish(
         "fleetsync/faults/new",
         JSON.stringify({
@@ -79,7 +69,6 @@ function faultHandlers(socket, io, activeConnections, client) {
         })
       );
 
-      // Emit update to all relevant clients
       await emitUpdatedFaults();
 
       socket.emit("faultReportSuccess", {
@@ -91,7 +80,6 @@ function faultHandlers(socket, io, activeConnections, client) {
     }
   });
 
-  // Handle status updates
   socket.on("updateFaultStatus", async ({ faultId, status }) => {
     try {
       if (socket.user.role !== "coordinator") {
@@ -112,7 +100,6 @@ function faultHandlers(socket, io, activeConnections, client) {
         throw new Error("Fault not found");
       }
 
-      // Publish status update to MQTT
       mqttClient.publish(
         "fleetsync/faults/status",
         JSON.stringify({
@@ -135,7 +122,6 @@ function faultHandlers(socket, io, activeConnections, client) {
     }
   });
 
-  // Handle initial faults request
   socket.on("requestFaults", async () => {
     try {
       let faults;
@@ -152,7 +138,6 @@ function faultHandlers(socket, io, activeConnections, client) {
     }
   });
 
-  // Clean up MQTT when socket disconnects
   socket.on("disconnect", () => {
     mqttClient.end();
   });
