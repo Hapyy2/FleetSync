@@ -7,7 +7,54 @@
 
 <h2 id="intro">🚛 Introduction</h2>
 
+&ensp;&ensp;**FleetSync** is a comprehensive web application designed for transport companies to efficiently manage their fleet operations. It provides a **real-time communication** platform between drivers and coordinators, enabling seamless **task management**, vehicle status tracking, and **incident reporting**. The application focuses on improving operational efficiency through an intuitive interface and robust feature set, making fleet management more streamlined and accessible.  
 <h2 id="feat">✨ Features</h2>
+
+### Real-time Fleet Management
+- Live tracking of status
+- Dynamic task assignment and management
+- Real-time updates on delivery progress
+- Instant notification system for status changes
+
+### Communication Hub
+- Built-in chat system between drivers and coordinators
+- Real-time messaging using Socket.IO
+- Centralized communication platform
+
+### Task Management
+- Create and assign tasks to drivers
+- Track task progress in real-time
+- Priority-based task organization
+- Detailed task history and reporting
+
+### Vehicle Management
+- Comprehensive truck fleet management
+- Vehicle status monitoring
+- Vehicle assignment optimization
+
+### Driver Management
+- Driver profile management
+- Work schedule organization
+- Performance tracking
+
+### Incident Reporting
+- Real-time fault reporting system
+- Incident tracking and resolution
+- Maintenance request management
+- Historical incident data analysis
+
+### Security & Authentication
+- Secure JWT-based authentication
+- Role-based access control
+- SSL/TLS encryption
+- Session management
+- Activity Monitoring system
+
+### Data Management
+- Centralized MongoDB database
+- Real-time data synchronization
+- Comprehensive logging system
+- Data backup and recovery
 
 <h2 id="tech">🛠️ Technologies Used</h2>
 
@@ -233,7 +280,5 @@ Open [http://localhost:3001](http://localhost:3001) in your browser to use the a
 ```
 > [!NOTE]
 > The contents of the Frontend code are located inside a React app.
-
-<h2 id="detail">🔍 Features in Detail</h2>
 
 <h2 id="screens">📸 Screenshots</h2>
