@@ -14,7 +14,6 @@
 - Live tracking of status
 - Dynamic task assignment and management
 - Real-time updates on delivery progress
-- Instant notification system for status changes
 
 ### Communication Hub
 - Built-in chat system between drivers and coordinators
@@ -24,7 +23,6 @@
 ### Task Management
 - Create and assign tasks to drivers
 - Track task progress in real-time
-- Priority-based task organization
 - Detailed task history and reporting
 
 ### Vehicle Management
@@ -40,8 +38,7 @@
 ### Incident Reporting
 - Real-time fault reporting system
 - Incident tracking and resolution
-- Maintenance request management
-- Historical incident data analysis
+- Historical incident data
 
 ### Security & Authentication
 - Secure JWT-based authentication
@@ -54,7 +51,6 @@
 - Centralized MongoDB database
 - Real-time data synchronization
 - Comprehensive logging system
-- Data backup and recovery
 
 <h2 id="tech">🛠️ Technologies Used</h2>
 
