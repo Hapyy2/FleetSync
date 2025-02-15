@@ -278,3 +278,41 @@ Open [http://localhost:3001](http://localhost:3001) in your browser to use the a
 > The contents of the Frontend code are located inside a React app.
 
 <h2 id="screens">📸 Screenshots</h2>
+
+> [!WARNING]  
+> The black square visible under or above the navigation bar on some screenshots is due to build in browser screenshots. It is not visible in actual app.
+
+![Login Page](/doc/images/LoginPage.png)
+*Login interface of FleetSync*
+
+### Coordinator Panel
+![Coordinator Main Panel](/doc/images/CoorMainPanel.png)
+*Main dashboard for coordinators*
+
+![Coordinator Tasks](/doc/images/CoorTasks.png)
+*Task management interface*
+
+![Task Form](/doc/images/CoorTaskForm.png)
+*Task creation and editing form*
+
+![Driver Form](/doc/images/CoorDriverForm.png)
+*Driver management interface*
+
+![Truck Form](/doc/images/CoorTruckForm.png)
+*Vehicle management interface*
+
+![Coordinator Report](/doc/images/CoorReport.png)
+*Incident reporting and management for coordinators*
+
+![Coordinator Chat](/doc/images/CoorChat.png)
+*Coordinator's communication panel*
+
+### Driver Panel
+![Driver Main Panel](/doc/images/DriverMainPanel.png)
+*Main dashboard for drivers*
+
+![Driver Report](/doc/images/DriverReport.png)
+*Incident reporting interface for drivers*
+
+![Driver Chat](/doc/images/DiverChat.png)
+*Driver's communication interface*
