@@ -32,6 +32,100 @@
 
 <h2 id="start">🚀 Getting Started</h2>
 
+Clone the repository
+```bash
+git clone https://github.com/Hapyy2/FleetSync.git
+cd FleetSync
+```
+
+### Backend 🔌  
+Run ```npm install``` in the **FleetSync-app** directory but if it does not install all of the dependencies properly run the following:  
+```bash
+npm install mongodb
+npm install express
+npm install dotenv
+npm install bcrypt
+npm install jsonwebtoken
+npm install cors
+npm install cookie-parser
+npm install socket.io
+npm install mqtt
+npm install --save-dev nodemon
+```
+
+> [!TIP]
+> In order to check if the dependencies where installed properly run the following command: *npm list --depth=0*
+
+In order for the app to work properly we need to setup a MQTT broker. As an example you can use <a href="https://github.com/hivemq/hivemq-community-edition">HIVEMQ broker community</a>.  
+After downloading the broker run it in its directory by: *./bin/run.sh*.  
+Additionaly we need a mongodb. We can choose to setup the server locally or use a service like <a href="https://www.mongodb.com/products/platform/atlas-database">Atlas</a>. If you choose to setup the mongodb locally run the following commands:  
+```bash
+sudo systemctl start mongod
+sudo systemctl status mongod
+```
+
+To generate keys for JWT tokens you can run the following command twice in node enviroment:
+```bash
+require('crypto').randomBytes(64).toString('hex')
+```
+
+In order to generate local certification for TLS you can use openssl in terminal:  
+```bash
+openssl genrsa -out localhost.key 2048
+openssl req -new -key localhost.key -out localhost.csr
+openssl x509 -req -days 365 -in localhost.csr -signkey localhost.key -out localhost.crt
+```
+
+Example of an .env file:
+```bash
+# Database
+DB_CONNECTION=[Your database url (For local mongodb: "mongodb://localhost:27017/transportCompany")]
+
+# JWT
+ACCESS_TOKEN_SECRET=[Your JWT key #1]
+REFRESH_TOKEN_SECRET=[Your JWT key #2]
+
+# Server
+PORT=3000
+
+# TLS (for HTTPS)
+SSL_KEY_PATH=backend/cert/localhost.key
+SSL_CERT_PATH=backend/cert/localhost.crt
+
+# Logging
+LOG_PATH=backend/logs/logs.txt
+```
+
+In the backend directory run to start the server:  
+```
+npm run devStart
+```
+
+### Sample Data: <br>
+
+In order to provide sample data for our application you can run the exampleData.js using mongosh. It is configured for local server but it can be adjusted. Command to run:  
+```bash
+mongosh exampleData.js
+```
+> [!IMPORTANT]
+> The password for all of the sample accounts is *hellojs*.   
+
+### Frontend 💻  
+You need to install **nextjs 15** and **React 18**. After making sure its properly installed run ```npm install``` in the **frontend** directory but if it does not install all of the dependencies properly run the following:  
+```
+npm install yup
+npm install formik
+npm install react-icons
+npm install socket.io-client
+npm install mqtt
+```
+In the frontend directory run to start the app:  
+```
+npm start dev
+```
+
+Open [http://localhost:3001](http://localhost:3001) in your browser to use the app.
+
 <h2 id="structure">🗂️ Project Structure</h2>
 
 ### Backend 🔌
